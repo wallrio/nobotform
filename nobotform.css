@@ -1,0 +1,30 @@
+/**
+ * NoBotForm
+ * Validation to humans submit form
+ * 
+ * Author: Wallace Rio <wallrio@gmail.com>
+ * 
+ */
+
+
+.nobotform .labelCheck{
+	color: #777;
+	cursor: pointer;
+	display: inline-table;
+}.nobotform .inputCheck{
+	display: none;
+}.nobotform .inputCheck + span.spanCheck{
+	transition:200ms;
+	display: inline-table;
+	content:" ";
+	border:1px solid #aaa;
+	min-width: 14px;
+	height: 14px;
+	margin-right: 4px;
+	cursor: pointer;
+	background: #fff;
+	vertical-align: middle;
+}.nobotform .inputCheck:checked + span.spanCheck{
+	border:1px solid #45B845;
+	box-shadow: 0px 0px 0px 5px #45B845 inset;
+}

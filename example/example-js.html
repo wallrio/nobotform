@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta charset="utf-8">
+	<title>NoBotForm</title>
+	<script type="text/javascript" src="../nobotform.js"></script>
+	<link rel="stylesheet" type="text/css" href="../nobotform.css">
+	
+	<script type="text/javascript">
+		nobotform.msgalert = "Selecione o checkbox para enviar - via javascript";
+		nobotform.checklabel = "Selecione para enviar - via javascript";
+		nobotform.error = function(msgalert){						
+			this.querySelector('.resultmsgalert').innerHTML = msgalert;
+		}
+		nobotform.success = function(msgalert){						
+			this.querySelector('.resultmsgalert').innerHTML = "Success";		
+			return false;
+		}
+	</script>
+</head>
+<body>
+
+	<h1>NoBotForm</h1>
+	<p>Validation to humans submit form</p>
+	<hr>
+
+	<h2>Example default using javascript</h2>
+
+	<form class="nobotform" >
+		<input name="name" type="text" value="" placeholder="Name:" required>
+		<input name="email" type="text" value="" placeholder="Email:" required>
+		<span class="resultmsgalert"></span>
+		<input type="submit" value="Enviar">
+	</form>
+
+
+
+</body>
+</html>
