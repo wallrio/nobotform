@@ -39,17 +39,18 @@ Only include the class 'nobotform' on your tag form and a element with class 're
 
 ### Define messages and behaviors by javascript
 
-<script type="text/javascript">
-    nobotform.msgalert = "Select the checkbox to send";
-    nobotform.checklabel = "Select to send";
-    nobotform.error = function(msgalert){						
-        this.querySelector('.resultmsgalert').innerHTML = msgalert;
-    }
-    nobotform.success = function(msgalert){						
-        this.querySelector('.resultmsgalert').innerHTML = "";
-        return false;
-    }
-</script>
+    <script type="text/javascript">
+        nobotform.msgalert = "Select the checkbox to send";
+        nobotform.checklabel = "Select to send";
+        nobotform.error = function(msgalert){						
+            this.querySelector('.resultmsgalert').innerHTML = msgalert;
+        }
+        nobotform.success = function(msgalert){						
+            this.querySelector('.resultmsgalert').innerHTML = "";
+            return false;
+        }
+    </script>
+    
 
 - nobotform.msgalert    =   (string)    Sets the validation response message
 - nobotform.checklabel  =   (string)    Sets the text of the checkbox
