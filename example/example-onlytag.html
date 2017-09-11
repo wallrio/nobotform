@@ -17,19 +17,17 @@
 
 	<h2>Example default only tag (no use javascript)</h2>
 
-	<form class="nobotform" >
+	<form class="nobotform" onsubmit="return false" >
 		<input name="name" type="text" value="" placeholder="Name:" required>
-		<input name="email" type="text" value="" placeholder="Email:" required>
-		<span class="resultmsgalert"></span>
+		<input name="email" type="text" value="" placeholder="Email:" required>	
 		<input type="submit" value="Enviar">
 	</form>
 
 	<h2>Example with changes of label and alert message (no use javascript)</h2>
 
-	<form class="nobotform" data-checklabel="Selecione para enviar" data-msgalert="Selecione o checkbox para enviar">
+	<form class="nobotform" data-checklabel="Selecione para enviar" data-msgalert="Selecione o checkbox para enviar" onsubmit="return false">
 		<input name="name" type="text" value="" placeholder="Name:" required>
-		<input name="email" type="text" value="" placeholder="Email:" required>
-		<span class="resultmsgalert"></span>
+		<input name="email" type="text" value="" placeholder="Email:" required>		
 		<input type="submit" value="Enviar">
 	</form>
 

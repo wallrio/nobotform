@@ -1,5 +1,5 @@
 /**
- * NoBotForm
+ * NoBotForm v1.2
  * Validation to humans submit form
  * 
  * Author: Wallace Rio <wallrio@gmail.com>
@@ -50,6 +50,8 @@
 				inputValidate.className="inputValidate";
 				nobotformAll[i].appendChild(inputValidate);
 
+				
+
 				var checklabel = nobotformAll[i].getAttribute('data-checklabel');
 
 				var labelCheck = document.createElement('label');				
@@ -59,10 +61,16 @@
 				labelCheck.innerHTML = '<input id="'+labelCheckId+'" type="checkbox" class="inputCheck" ><span class="spanCheck"></span>'+(checklabel || nobotform.checklabel);
 				nobotformAll[i].appendChild(labelCheck);
 
-				nobotformAll[i].querySelector('.inputCheck').onclick = function(e){					
+				nobotformAll[i].querySelector('.inputCheck').calcValidate1 = Math.random();
+				nobotformAll[i].querySelector('.inputCheck').calcValidate2 = Math.random();
+
+				nobotformAll[i].querySelector('.inputCheck').onclick = function(e){
+					var calcValidate1 = this.calcValidate1;	
+					var calcValidate2 = this.calcValidate2;	
+
 					var inputValidate= this.parentNode.parentNode.querySelector('.inputValidate');
 					if(this.checked == true){
-						inputValidate.value = this.id;
+						inputValidate.value = calcValidate1 + calcValidate2;
 						return;
 					}					
 					inputValidate.value = "";					
@@ -75,9 +83,10 @@
 					var inputCheck = this.querySelector('.inputCheck');
 					var valCheck = this.querySelector('.inputCheck').id;
 
-					
+					var calcValidate1 = this.querySelector('.inputCheck').calcValidate1;	
+					var calcValidate2 = this.querySelector('.inputCheck').calcValidate2;	
 
-					if( inputCheck.checked != true || value != valCheck){								
+					if( inputCheck.checked != true || value != (calcValidate1+calcValidate2) ){								
 						if(nobotform.error){
 							nobotform.error.call(this,msgalert || nobotform.msgalert);
 						}else{

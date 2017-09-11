@@ -15,13 +15,15 @@ Only include the class 'nobotform' on your tag form and a element with class 're
 
 ### Example:
 
-    <form class="nobotform" >
+    <form class="nobotform" onsubmit="return false">
         <input name="name" type="text" value="" placeholder="Name:">
-        <input name="email" type="text" value="" placeholder="Email:">	
-        <span class="resultmsgalert"></span>
+        <input name="email" type="text" value="" placeholder="Email:">	        
         <input type="submit" value="Send">
     </form>
 
+OBS:
+
+    use onsubmit="return false" for prevent action of form before load nobotform
 
 ### Define messages and behaviors
 
