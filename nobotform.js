@@ -1,9 +1,9 @@
 /**
  * NoBotForm v1.2
  * Validation to humans submit form
- * 
+ *
  * Author: Wallace Rio <wallrio@gmail.com>
- * 
+ *
  */
 
 (function(){
@@ -15,24 +15,24 @@
 
 	/**
 	 * [addEvent description]
-	 * 
+	 *
 	 */
-	this.addEvent  = function(objs,event,callback,mode,par1,par2){		
+	this.addEvent  = function(objs,event,callback,mode,par1,par2){
 		if(mode == undefined)
 			mode = true;
 
 		if(objs == undefined)
-			objs = window; 
-		if(objs.addEventListener){ 				
+			objs = window;
+		if(objs.addEventListener){
 			return objs.addEventListener(event,function(e){
 				if(callback)
 					return callback(e,objs,par1,par2);
-			},mode); 
+			},mode);
 		}else if(objs.attachEvent){
 			return objs.attachEvent('on'+event,function(e){
 				if(callback)
 					return callback(e,objs,par1,par2);
-			}); 
+			});
 		}
 	};
 
@@ -42,19 +42,25 @@
 	 */
 	this.__construct = function(){
 		this.addEvent(window,'load',function(){
-			var nobotformAll = document.querySelectorAll('.nobotform');			
+			var nobotformAll = document.querySelectorAll('.nobotform');
 			for (var i = 0; i < nobotformAll.length; i++) {
-				
+
+				var elementForm = nobotformAll[i].getAttribute('data-nobotform-action');
+				if(elementForm != undefined){
+					nobotformAll[i].setAttribute('action',elementForm);
+					nobotformAll[i].removeAttribute('data-nobotform-action');
+				}
+
 				var inputValidate = document.createElement('input');
 				inputValidate.type="hidden";
 				inputValidate.className="inputValidate";
 				nobotformAll[i].appendChild(inputValidate);
 
-				
+
 
 				var checklabel = nobotformAll[i].getAttribute('data-checklabel');
 
-				var labelCheck = document.createElement('label');				
+				var labelCheck = document.createElement('label');
 				labelCheck.className="labelCheck";
 				var labelCheckId = 'labelCheck'+i;
 				labelCheck.setAttribute('for',labelCheckId);
@@ -65,16 +71,16 @@
 				nobotformAll[i].querySelector('.inputCheck').calcValidate2 = Math.random();
 
 				nobotformAll[i].querySelector('.inputCheck').onclick = function(e){
-					var calcValidate1 = this.calcValidate1;	
-					var calcValidate2 = this.calcValidate2;	
+					var calcValidate1 = this.calcValidate1;
+					var calcValidate2 = this.calcValidate2;
 
 					var inputValidate= this.parentNode.parentNode.querySelector('.inputValidate');
 					if(this.checked == true){
 						inputValidate.value = calcValidate1 + calcValidate2;
 						return;
-					}					
-					inputValidate.value = "";					
-				}	
+					}
+					inputValidate.value = "";
+				}
 
 				nobotformAll[i].onsubmit = function(){
 					var inputValidate= this.querySelector('.inputValidate');
@@ -83,26 +89,26 @@
 					var inputCheck = this.querySelector('.inputCheck');
 					var valCheck = this.querySelector('.inputCheck').id;
 
-					var calcValidate1 = this.querySelector('.inputCheck').calcValidate1;	
-					var calcValidate2 = this.querySelector('.inputCheck').calcValidate2;	
+					var calcValidate1 = this.querySelector('.inputCheck').calcValidate1;
+					var calcValidate2 = this.querySelector('.inputCheck').calcValidate2;
 
-					if( inputCheck.checked != true || value != (calcValidate1+calcValidate2) ){								
+					if( inputCheck.checked != true || value != (calcValidate1+calcValidate2) ){
 						if(nobotform.error){
 							nobotform.error.call(this,msgalert || nobotform.msgalert);
 						}else{
 							alert(msgalert || nobotform.msgalert);
 						}
-						return false;	
+						return false;
 					}else{
 						if(nobotform.success){
 							var result = nobotform.success.call(this);
-							
+
 							if(result === false)
 								return false;
 						}
 					}
 
-					
+
 				}
 			};
 		});
@@ -113,4 +119,3 @@
 	window.nobotform = this;
 
 })();
-

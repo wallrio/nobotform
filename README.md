@@ -15,15 +15,15 @@ Only include the class 'nobotform' on your tag form and a element with class 're
 
 ### Example:
 
-    <form class="nobotform" onsubmit="return false">
+    <form class="nobotform"  data-nobotform-action="http://...">
         <input name="name" type="text" value="" placeholder="Name:">
         <input name="email" type="text" value="" placeholder="Email:">	        
         <input type="submit" value="Send">
     </form>
 
 OBS:
+    use the attribute (data-nobotform-action) with action target
 
-    use onsubmit="return false" for prevent action of form before load nobotform
 
 ### Define messages and behaviors
 
@@ -32,7 +32,7 @@ OBS:
 
 #### Example:
 
-    <form class="nobotform" data-checklabel="Select to send" data-msgalert="Fill in the fields correctly">
+    <form class="nobotform" data-checklabel="Select to send" data-msgalert="Fill in the fields correctly" data-nobotform-action="http://...">
         <input name="name" type="text" placeholder="Name:">
         <input name="email" type="text" placeholder="Email:">
         <span class="resultmsgalert"></span>
@@ -52,10 +52,9 @@ OBS:
             return false;
         }
     </script>
-    
+
 
 - nobotform.msgalert    =   (string)    Sets the validation response message
 - nobotform.checklabel  =   (string)    Sets the text of the checkbox
 - nobotform.error       =   (function)  Defines a code to be executed if the form is not validated correctly
 - nobotform.success     =   (function)  Defines a code to be executed if the form is validated successfully
-    
