@@ -60,22 +60,28 @@
 					nobotformAll[i].removeAttribute('data-nobotform-action');
 				}
 
-				var inputValidate = document.createElement('input');
-				inputValidate.type="hidden";
-				inputValidate.className="inputValidate";
-				nobotformAll[i].appendChild(inputValidate);
-
 
 
 				var checklabel = nobotformAll[i].getAttribute('data-checklabel');
 
 
-				var labelCheck = document.createElement('label');
-				labelCheck.className="labelCheck";
+
+				if(nobotformAll[i].querySelector('.labelCheck') == undefined){
+
+					var labelCheck = document.createElement('label');
+					labelCheck.className="labelCheck";
+					var ifAppend = true;
+				}else{
+					var ifAppend = false;
+					var labelCheck = nobotformAll[i].querySelector('.labelCheck');
+				}
+
 				var labelCheckId = 'labelCheck'+i;
 				labelCheck.formCurrent = nobotformAll[i];
 				labelCheck.setAttribute('for',labelCheckId);
+
 				labelCheck.innerHTML = '<div data-nobotform-check></div><label data-nobotform-label>'+(checklabel || nobotform.checklabel)+'</label>';
+
 				labelCheck.onmouseup = function(){
 					var status = this.getAttribute('data-status');
 					var validatemsg = this.formCurrent.getAttribute('data-validatemsg') || self.validateMsg;
@@ -91,13 +97,13 @@
 						this.querySelector('[data-nobotform-label]').innerHTML = validatemsg;
 					}
 				}
-				nobotformAll[i].appendChild(labelCheck);
+
+				if(ifAppend == true) nobotformAll[i].appendChild(labelCheck);
 
 
 				nobotformAll[i].onsubmit = function(){
 
-					var inputValidate= this.querySelector('.inputValidate');
-					var value = inputValidate.value;
+
 					var msgalert = this.getAttribute('data-msgalert');
 
 					var labelCheck = this.querySelector('.labelCheck');
