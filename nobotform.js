@@ -8,10 +8,19 @@
 
 (function(){
 
+	var self = {};
+
+
 	this.checklabel = "Select the checkbox";
 	this.msgalert = "Select the checkbox";
 	this.success = null;
 	this.error = null;
+
+	if(this.validateMsg == undefined)
+		self.validateMsg =  "OK";
+	else
+		self.validateMsg = this.validateMsg;
+
 
 	/**
 	 * [addEvent description]
@@ -60,17 +69,27 @@
 
 				var checklabel = nobotformAll[i].getAttribute('data-checklabel');
 
+
 				var labelCheck = document.createElement('label');
 				labelCheck.className="labelCheck";
 				var labelCheckId = 'labelCheck'+i;
+				labelCheck.formCurrent = nobotformAll[i];
 				labelCheck.setAttribute('for',labelCheckId);
-				labelCheck.innerHTML = '<div data-nobotform-check></div>'+(checklabel || nobotform.checklabel);
+				labelCheck.innerHTML = '<div data-nobotform-check></div><label data-nobotform-label>'+(checklabel || nobotform.checklabel)+'</label>';
 				labelCheck.onmouseup = function(){
 					var status = this.getAttribute('data-status');
-					if(status == 'active')
+					var validatemsg = this.formCurrent.getAttribute('data-validatemsg') || self.validateMsg;
+
+
+
+					if(status == 'active'){
 						this.removeAttribute('data-status');
-					else
+						this.querySelector('[data-nobotform-label]').innerHTML = this.querySelector('[data-nobotform-label]').contentBefore;
+					}else{
 						this.setAttribute('data-status','active');
+						this.querySelector('[data-nobotform-label]').contentBefore = this.querySelector('[data-nobotform-label]').innerHTML;
+						this.querySelector('[data-nobotform-label]').innerHTML = validatemsg;
+					}
 				}
 				nobotformAll[i].appendChild(labelCheck);
 
@@ -86,6 +105,8 @@
 					if(status == 'active'){
 						if(nobotform.success){
 							var result = nobotform.success.call(this);
+
+
 
 							if(result === false)
 								return false;

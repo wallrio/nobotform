@@ -8,9 +8,7 @@
 
 
 .nobotform .labelCheck{
-	color: #777;
 	cursor: pointer;
-	display: inline-table;
 }
 
 .nobotform .labelCheck [data-nobotform-check]{
@@ -26,8 +24,38 @@
 	transform:rotateY(0deg);
 }.nobotform .labelCheck[data-status="active"] [data-nobotform-check]{
 	border:2px solid #2bc305;
-	box-shadow: 0 0 0 5px #fff inset,
-				0 0 0 220px green inset;
 
-	transform:rotateY(180deg);
+	transform:rotateY(360deg);
+	position: relative;
+}.nobotform .labelCheck[data-status="active"] [data-nobotform-check]:before{
+	content: " ";
+	border: 2px solid #67d501;
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	box-sizing: border-box;
+	border-radius: 30px;
+	top: 0px;
+	left: 0px;
+}.nobotform .labelCheck[data-status="active"] [data-nobotform-check]:after{
+	content: " ";
+	width: 0px;
+	height: 0px;
+	position: absolute;
+	box-sizing: border-box;
+	border-radius: 30px;
+	top: 50%;
+	left: 50%;
+	background: #67d501;
+	padding: 7px;
+	transform: translateX(-50%) translateY(-50%);
+}
+
+.nobotform .labelCheck [data-nobotform-label] {
+
+	cursor: pointer;
+	display: inline-table !important;
+	transition: 300ms;
+}.nobotform .labelCheck[data-status="active"] [data-nobotform-label] {
+	color: #67d501 !important;
 }
