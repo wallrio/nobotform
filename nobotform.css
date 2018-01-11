@@ -9,6 +9,13 @@
 
 .nobotform .labelCheck{
 	cursor: pointer;
+	background: #333;
+	padding: 10px;
+	box-shadow: 0 0 6px -3px #333;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	width: 100%;
+	box-sizing: border-box !important;
 }
 
 .nobotform .labelCheck [data-nobotform-check]{
@@ -22,11 +29,14 @@
 	border-radius: 22px;
 	perspective: 600px;
 	transform:rotateY(0deg);
+}.nobotform .labelCheck:hover [data-nobotform-check]{
+	border: 2px solid #2bc305 !important;
 }.nobotform .labelCheck[data-status="active"] [data-nobotform-check]{
 	border:2px solid #2bc305;
 
 	transform:rotateY(360deg);
 	position: relative;
+
 }.nobotform .labelCheck[data-status="active"] [data-nobotform-check]:before{
 	content: " ";
 	border: 2px solid #67d501;
@@ -37,6 +47,7 @@
 	border-radius: 30px;
 	top: 0px;
 	left: 0px;
+
 }.nobotform .labelCheck[data-status="active"] [data-nobotform-check]:after{
 	content: " ";
 	width: 0px;
@@ -49,13 +60,16 @@
 	background: #67d501;
 	padding: 7px;
 	transform: translateX(-50%) translateY(-50%);
+
 }
 
 .nobotform .labelCheck [data-nobotform-label] {
-
-	cursor: pointer;
+	color: #fff;
+	cursor: pointer !important;
 	display: inline-table !important;
 	transition: 300ms;
+	width: auto !important;
+
 }.nobotform .labelCheck[data-status="active"] [data-nobotform-label] {
 	color: #67d501 !important;
 }
