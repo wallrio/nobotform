@@ -1,9 +1,9 @@
 /**
  * NoBotForm
  * Validation to humans submit form
- * 
+ *
  * Author: Wallace Rio <wallrio@gmail.com>
- * 
+ *
  */
 
 
@@ -11,20 +11,23 @@
 	color: #777;
 	cursor: pointer;
 	display: inline-table;
-}.nobotform .inputCheck{
-	display: none;
-}.nobotform .inputCheck + span.spanCheck{
-	transition:200ms;
+}
+
+.nobotform .labelCheck [data-nobotform-check]{
 	display: inline-table;
-	content:" ";
-	border:1px solid #aaa;
-	min-width: 14px;
-	height: 14px;
-	margin-right: 4px;
-	cursor: pointer;
-	background: #fff;
+	border:2px solid #aaa;
+	height: 24px;
+	width: 24px;
 	vertical-align: middle;
-}.nobotform .inputCheck:checked + span.spanCheck{
-	border:1px solid #45B845;
-	box-shadow: 0px 0px 0px 5px #45B845 inset;
+	margin: 5px;
+	transition:300ms;
+	border-radius: 22px;
+	perspective: 600px;
+	transform:rotateY(0deg);
+}.nobotform .labelCheck[data-status="active"] [data-nobotform-check]{
+	border:2px solid #2bc305;
+	box-shadow: 0 0 0 5px #fff inset,
+				0 0 0 220px green inset;
+
+	transform:rotateY(180deg);
 }

@@ -1,5 +1,5 @@
 /**
- * NoBotForm v1.2
+ * NoBotForm v1.3
  * Validation to humans submit form
  *
  * Author: Wallace Rio <wallrio@gmail.com>
@@ -64,49 +64,43 @@
 				labelCheck.className="labelCheck";
 				var labelCheckId = 'labelCheck'+i;
 				labelCheck.setAttribute('for',labelCheckId);
-				labelCheck.innerHTML = '<input id="'+labelCheckId+'" type="checkbox" class="inputCheck" ><span class="spanCheck"></span>'+(checklabel || nobotform.checklabel);
+				labelCheck.innerHTML = '<div data-nobotform-check></div>'+(checklabel || nobotform.checklabel);
+				labelCheck.onmouseup = function(){
+					var status = this.getAttribute('data-status');
+					if(status == 'active')
+						this.removeAttribute('data-status');
+					else
+						this.setAttribute('data-status','active');
+				}
 				nobotformAll[i].appendChild(labelCheck);
 
-				nobotformAll[i].querySelector('.inputCheck').calcValidate1 = Math.random();
-				nobotformAll[i].querySelector('.inputCheck').calcValidate2 = Math.random();
-
-				nobotformAll[i].querySelector('.inputCheck').onclick = function(e){
-					var calcValidate1 = this.calcValidate1;
-					var calcValidate2 = this.calcValidate2;
-
-					var inputValidate= this.parentNode.parentNode.querySelector('.inputValidate');
-					if(this.checked == true){
-						inputValidate.value = calcValidate1 + calcValidate2;
-						return;
-					}
-					inputValidate.value = "";
-				}
 
 				nobotformAll[i].onsubmit = function(){
+
 					var inputValidate= this.querySelector('.inputValidate');
 					var value = inputValidate.value;
 					var msgalert = this.getAttribute('data-msgalert');
-					var inputCheck = this.querySelector('.inputCheck');
-					var valCheck = this.querySelector('.inputCheck').id;
 
-					var calcValidate1 = this.querySelector('.inputCheck').calcValidate1;
-					var calcValidate2 = this.querySelector('.inputCheck').calcValidate2;
-
-					if( inputCheck.checked != true || value != (calcValidate1+calcValidate2) ){
-						if(nobotform.error){
-							nobotform.error.call(this,msgalert || nobotform.msgalert);
-						}else{
-							alert(msgalert || nobotform.msgalert);
-						}
-						return false;
-					}else{
+					var labelCheck = this.querySelector('.labelCheck');
+					var status = labelCheck.getAttribute('data-status');
+					if(status == 'active'){
 						if(nobotform.success){
 							var result = nobotform.success.call(this);
 
 							if(result === false)
 								return false;
 						}
+					}else{
+
+						if(nobotform.error){
+							nobotform.error.call(this,msgalert || nobotform.msgalert);
+						}else{
+							alert(msgalert || nobotform.msgalert);
+						}
+						return false;
 					}
+
+
 
 
 				}
